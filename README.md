@@ -2,7 +2,7 @@
 
 ## Overview:
 
-This repository houses a collection of robotics projects developed using the Robot Operating System (ROS) and Java programming language. These projects encompass a wide range of applications, including autonomous navigation, machine learning for energy consumption prediction, robot modeling, teleoperation, mapping in ROS, 2D image processing with ROS and OpenCV, and complex behaviors using BehaviorTree.CPP and Nav2.
+This repository houses a collection of robotics projects developed using the Robot Operating System (ROS) and the JADE framework. These projects encompass a wide range of applications, including autonomous navigation, machine learning for energy consumption prediction, robot modeling, teleoperation, mapping in ROS, 2D image processing with ROS and OpenCV, and complex behaviors using BehaviorTree.CPP and Nav2.
 
 ## Contents:
 
