@@ -1,0 +1,33 @@
+<launch>
+    <arg name="rvizconfig" default="$(find tr5_description)/rviz/TR5.rviz" />
+    
+    <node pkg="tr5_kinematics" type="tr5_forward_kin_node.py" name="tr5_forward_kin_node" output="screen" required="true">
+        <param name="for_kin_service" type="string" value="/do_fk"/>
+    </node>  
+	
+	<node pkg="tr5_kinematics" type="tr5_inverse_kin_node.py" name="tr5_inverse_kin_node" output="screen" required="true">
+        <param name="inv_kin_service" type="string" value="/do_ik"/>
+    </node> 
+    
+    <node pkg="tr5_robot_controller" type="tr5_robot_controller_node.py" name="tr5_robot_controller_node" output="screen">
+        <param name="kin_mode_service" type="string" value="/kin_mode"/>
+        <param name="for_kin_service" type="string" value="/do_fk"/>
+        <param name="inv_kin_service" type="string" value="/do_ik"/>
+        <param name="gui_joints_topic" type="string" value="/gui_joints"/>
+        <param name="goal_joints_topic" type="string" value="/goal_joints"/>
+        <param name="goal_pose_topic" type="string" value="/visualization_marker"/>
+    </node> 
+        
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find tr5_description)/urdf/tr5_robot_basic.urdf.xacro'" />
+    
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="tr5_joint_state_publisher">
+        <param name="rate" type="double" value="20.0"/>
+        <remap from="joint_states" to="/gui_joints"/>
+    </node>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="tr5_state_publisher">
+        <remap from="joint_states" to="/goal_joints"/>
+    </node>
+</launch>

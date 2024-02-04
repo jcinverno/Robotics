@@ -1,0 +1,3 @@
+geometry_msgs/Pose start_inverse
+---
+sensor_msgs/JointState end_inverse
